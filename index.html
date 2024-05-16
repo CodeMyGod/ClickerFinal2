@@ -19,12 +19,30 @@
       </div>
       <div id="unity-warning"> </div>
     </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+
+function expand() {
+    if (Telegram !== undefined && Telegram.WebApp !== undefined) {
+        Telegram.WebApp.expand();
+    } else {
+        console.error("Telegram or Telegram.WebApp is undefined. Cannot expand.");
+    }
+}
+      window.onload = function() {
+    expand(); // Ðîçøèðèòè äîäàòîê ïðè çàâàíòàæåíí³ ñòîð³íêè
+};
+      
       window.addEventListener("load", function () {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("ServiceWorker.js");
-        }
-      });
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("ServiceWorker.js");
+    }
+    if (Telegram !== undefined && Telegram.WebApp !== undefined) {
+        expand(); // Ðîçøèðèòè ãðó íà âåñü åêðàí ï³ñëÿ çàâàíòàæåííÿ ñòîð³íêè
+    } else {
+        console.error("Telegram or Telegram.WebApp is undefined. Cannot expand.");
+    }
+});
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
